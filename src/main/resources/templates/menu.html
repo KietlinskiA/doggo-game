@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pies Doggo - wierny kumpel</title>
+    <link href="img/ico.png" rel="icon">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="background-container">
+    <div id="main-container">
+        <div id="top-panel">
+            <div id="lvl">
+                <div id="lvl-value" th:text="${lvlValue}"></div>
+            </div>
+            <div id="exp">
+                <span th:text="${expValue}"></span><br>
+                <div id="hr-wrapper">
+                    <hr th:width="${expValue*3}+'px'">
+                </div>
+            </div>
+            <div id="idk">
+                <form action="/reset" method="post">
+                    <button id="reset" type="submit">
+                        <img src="img/reset.png" width="30px" height="30px">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div id="mid-panel">
+            <img id="sofa" src="img/sofa.png" alt="sofa">
+            <img id="dog" th:src="'img/dog'+${lvlValue}+'.png'" alt="dog">
+        </div>
+        <div id="bot-panel">
+            <div id="button-panel">
+                <form action="/upExpValue" method="post">
+                    <input id="eat" type="submit" value="Nakarm">
+                </form>
+                <input id="clean" type="button" value="Posprzątaj">
+                <input id="wash" type="button" value="Umyj">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
