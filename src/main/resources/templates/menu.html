@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta http-equiv="refresh" content="5">
     <meta charset="UTF-8">
     <title>Pies Doggo - wierny kumpel</title>
     <link href="img/ico.png" rel="icon">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div id="background-container">
+<div id="background-container" th:object="${dog}">
     <div id="main-container">
         <div id="top-panel">
-            <div id="lvl">
-                <div id="lvl-value" th:text="${lvlValue}"></div>
+            <div id="right-box">
+                <div id="lvl-value" th:text="*{getLvlValue()}"></div>
             </div>
-            <div id="exp">
-                <span th:text="${expValue}"></span><br>
-                <div id="hr-wrapper">
-                    <hr th:width="${expValue*3}+'px'">
+            <div id="mid-box">
+                <div id="exp-value">
+                    <span th:text="*{getExpValue()}"></span><br>
+                    <div id="hr-wrapper">
+                        <hr th:width="*{getExpValue()*3}+'px'">
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    let time;
+                    if (document.getElementById('info-p').textContent === 'Posprzątane!'){
+                        time = 3000;
+                        console.log("elo")
+                    } else {
+                        time = 1000;
+                        console.log("hej")
+                    }
+                    setTimeout(function () {
+                        document.getElementById('info-p').innerHTML = ' ';
+                    }, time);
+                </script>
+                <div id="info">
+                    <p id="info-p" th:text="*{getDogInfo()}"></p>
                 </div>
             </div>
-            <div id="idk">
+            <div id="left-box">
                 <form action="/reset" method="post">
                     <button id="reset" type="submit">
                         <img src="img/reset.png" width="30px" height="30px">
@@ -29,15 +48,19 @@
         </div>
         <div id="mid-panel">
             <img id="sofa" src="img/sofa.png" alt="sofa">
-            <img id="dog" th:src="'img/dog'+${lvlValue}+'.png'" alt="dog">
+            <img id="dog" th:src="'img/dog'+*{getLvlValue()}+'.png'" alt="dog">
         </div>
         <div id="bot-panel">
             <div id="button-panel">
                 <form action="/upExpValue" method="post">
                     <input id="eat" type="submit" value="Nakarm">
                 </form>
-                <input id="clean" type="button" value="Posprzątaj">
-                <input id="wash" type="button" value="Umyj">
+                <form action="/doCleanUp" method="post">
+                    <input id="clean" type="submit" value="Posprzątaj">
+                </form>
+                <form action="/doWashDog" method="post">
+                    <input id="wash" type="submit" value="Umyj">
+                </form>
             </div>
         </div>
     </div>

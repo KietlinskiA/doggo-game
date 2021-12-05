@@ -4,6 +4,9 @@ import lombok.Data;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Data
 @Component
 public class Dog {
@@ -11,13 +14,14 @@ public class Dog {
     private int expValue;
     private boolean cleanUp;
     private boolean washDog;
-    private long time;
+    private String dogInfo;
 
     public Dog() {
         this.lvlValue = 1;
         this.expValue = 0;
         this.cleanUp = false;
         this.washDog = false;
+        dogInfo = " ";
     }
 
     public void upExpValue() {
@@ -29,22 +33,28 @@ public class Dog {
     private void upLvlValue() {
         lvlValue += 1;
         expValue = 0;
+        setDogInfo("Twój piesek awansował!");
     }
 
-    public void reset() {
-        lvlValue = 1;
-        expValue = 0;
+    public void doCleanUp() {
+        cleanUp = false;
+        setDogInfo("Posprzątane!");
     }
 
-    @Scheduled(fixedDelay = 5000)
     public void cleanUpTime() {
         cleanUp = true;
-        System.out.println("cleanUp");
+        setDogInfo("Musisz posprzątać!");
     }
 
-    @Scheduled(fixedDelay = 12000)
+    public void doWashDog() {
+        washDog = false;
+        setDogInfo("Piesek umyty!");
+    }
+
+    @Scheduled(fixedDelay = 2000)
     public void washDogTime() {
         washDog = true;
-        System.out.println("washDog");
+        setDogInfo("Musisz go umyć!");
     }
+
 }
