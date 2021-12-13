@@ -1,4 +1,4 @@
-# Indress
+# Doggo game
 ## Wstęp
 Jest to jeden z projektów non-profit stworzonych, aby szlifować swoje umiejętności.
 
