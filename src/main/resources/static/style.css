@@ -1,5 +1,5 @@
 body {
-    background-image: url(https://thumbs.dreamstime.com/b/t%C5%82a-ko%C5%9Bci-psa-%C5%82apy-druk-43949441.jpg);
+    background-image: url('img/tlo.jpg');
     font-family: monospace;
 }
 
@@ -136,6 +136,26 @@ body {
     margin: 0 -50% 0 0;
 }
 
+#dirt {
+    position: fixed;
+    top: 43%;
+    left: 40%;
+}
+
+#bowl {
+    position: fixed;
+    top: 60%;
+    left: 10%;
+    width: 100px;
+    height: 100px;
+}
+
+#feet {
+    position: fixed;
+    top: 60%;
+    left: 75%;
+}
+
 #bot-panel {
     background-color: white;
     height: 100px;
@@ -161,12 +181,12 @@ body {
     width: 266px;
 }
 
-#clean{
+#wash{
     width: 268px;
     border-left: 1px silver solid;
 }
 
-#wash{
+#clean{
     width: 266px;
     border-radius: 0 0 10px 0;
     border-left: 1px silver solid;
@@ -178,4 +198,30 @@ body {
 
 #eat:active, #clean:active, #wash:active {
     background-color: #227B22;
+}
+
+#again {
+    border-top: 1px white solid;
+    border-right: 1px silver solid;
+    border-bottom: 1px silver solid;
+    border-left: 1px white solid;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #C0C0C0;
+}
+
+#again:hover {
+    border-top: 1px silver solid;
+    border-right: 1px white solid;
+    border-bottom: 1px white solid;
+    border-left: 1px silver solid;
+    background-color: #E0E0E0;
+}
+
+#again:active {
+    border-top: 1px silver solid;
+    border-right: 1px white solid;
+    border-bottom: 1px white solid;
+    border-left: 1px silver solid;
+    background-color: #A0A0A0;
 }

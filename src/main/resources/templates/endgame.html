@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pies Doggo - wierny kumpel</title>
+    <link href="img/ico.png" rel="icon">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="background-container">
+    <div id="main-container">
+        <div id="top-panel">
+        </div>
+        <div id="mid-panel">
+            <div style="background-color: cornsilk;box-shadow: #228b22 0 0 4px 3px;width: 400px;height: 200px;
+            position: fixed;top: 30%;left: 25%;text-align: center;">
+                <h1>Gratulacje!</h1>
+                <h2>Twój piesek osiągnął</h2>
+                <h2>maksymalny poziom.</h2>
+                <br/>
+                <a th:href="@{/newGame}" method="post" style="color: black; text-decoration: none;">
+                    <span id="again">
+                        Zacznij jeszcze raz
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div id="bot-panel" style="background-color: #228B22">
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="refresh" content="5">
+    <meta http-equiv="refresh" content="2">
     <meta charset="UTF-8">
     <title>Pies Doggo - wierny kumpel</title>
     <link href="img/ico.png" rel="icon">
@@ -21,25 +21,12 @@
                         <hr th:width="*{getExpValue()*3}+'px'">
                     </div>
                 </div>
-                <script type="text/javascript">
-                    let time;
-                    if (document.getElementById('info-p').textContent === 'Posprzątane!'){
-                        time = 3000;
-                        console.log("elo")
-                    } else {
-                        time = 1000;
-                        console.log("hej")
-                    }
-                    setTimeout(function () {
-                        document.getElementById('info-p').innerHTML = ' ';
-                    }, time);
-                </script>
                 <div id="info">
                     <p id="info-p" th:text="*{getDogInfo()}"></p>
                 </div>
             </div>
             <div id="left-box">
-                <form action="/reset" method="post">
+                <form action="/reset">
                     <button id="reset" type="submit">
                         <img src="img/reset.png" width="30px" height="30px">
                     </button>
@@ -49,17 +36,20 @@
         <div id="mid-panel">
             <img id="sofa" src="img/sofa.png" alt="sofa">
             <img id="dog" th:src="'img/dog'+*{getLvlValue()}+'.png'" alt="dog">
+            <img id="dirt" src="img/dirt2.png" alt="dirt" th:style="'visibility: '+${dirtVisibility}">
+            <img id="bowl" th:src="${bowlFilling}" alt="bowl">
+            <img id="feet" src="img/feet.png" alt="feet" th:style="'visibility: '+${feetVisibility}">
         </div>
         <div id="bot-panel">
             <div id="button-panel">
-                <form action="/upExpValue" method="post">
+                <form action="/doFeed" method="post">
                     <input id="eat" type="submit" value="Nakarm">
-                </form>
-                <form action="/doCleanUp" method="post">
-                    <input id="clean" type="submit" value="Posprzątaj">
                 </form>
                 <form action="/doWashDog" method="post">
                     <input id="wash" type="submit" value="Umyj">
+                </form>
+                <form action="/doCleanUp" method="post">
+                    <input id="clean" type="submit" value="Posprzątaj">
                 </form>
             </div>
         </div>

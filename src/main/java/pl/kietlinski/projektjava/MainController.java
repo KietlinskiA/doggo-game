@@ -4,61 +4,78 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 @Controller
 @Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class MainController {
 
-    private Dog dog;
+    private MainService mainService;
 
     @Autowired
-    public MainController() {
-        dog = new Dog();
+    public MainController(MainService mainService) {
+        this.mainService = mainService;
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
+    public String get() {
+        return "redirect:/app";
     }
 
     @GetMapping("/app")
-    public ModelAndView get(Model model) {
-        return new ModelAndView("menu", "dog", dog);
+    public String get(Model model) {
+        model.addAttribute("dirtVisibility", mainService.getDirtVisibility());
+        model.addAttribute("bowlFilling", mainService.getBowlFilling());
+        model.addAttribute("feetVisibility", mainService.getFeetVisibility());
+        model.addAttribute("dog", mainService.getDog());
+        if(mainService.getDog().getLvlValue() >= 2){
+            return "redirect:/end";
+        }
+        return "menu";
     }
 
-    @PostMapping("/upExpValue")
+    @PostMapping("/doFeed")
     @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
-    public String upExpValue() {
-        dog.upExpValue();
+    public String doFeed() {
+        mainService.doFeed();
         return "redirect:/app";
     }
 
     @PostMapping("/doCleanUp")
     @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
     public String doCleanUp() {
-        dog.doCleanUp();
+        mainService.doCleanUp();
         return "redirect:/app";
     }
 
     @PostMapping("/doWashDog")
     @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
     public String doWashDog() {
-        dog.doWashDog();
+        mainService.doWashDog();
         return "redirect:/app";
     }
 
-    @PostMapping("/reset")
+    @RequestMapping("/reset")
     @ResponseStatus(HttpStatus.MOVED_PERMANENTLY)
     public String reset() {
-        dog = new Dog();
+        mainService.reset();
         return "redirect:/app";
     }
 
-    public String washDogTime() {
-        dog.washDogTime();
+    @GetMapping("/end")
+    public String end() {
+        return "endgame";
+    }
+
+    @GetMapping("/newGame")
+    public String newGame() {
+        mainService.reset();
         return "redirect:/app";
     }
 }
