@@ -1,5 +1,4 @@
 # Doggo game
-## Wstęp
 Jest to jeden z projektów non-profit stworzonych, aby szlifować swoje umiejętności.
 
 ![App image](src/main/resources/static/img/ss.png)
